@@ -31,23 +31,29 @@ const tic_tac_toe = {
         this.draw()
     },
 
-    make_play(position) {
-        if (this.game_over) return false
-        if (this.board[position] === '') {
-            this.board[position] = this.symbols.options[this.symbols.turn_index]
-
-            this.draw()
-
-            let winning_sequences_index = this.check_winning_sequences(this.symbols.options[this.symbols.turn_index] )
-            if (winning_sequences_index >= 0 ) {
-                this.game_is_over()
-            } else {
-                this.symbols.change()
-            }
-            return true
-        } else {
-            return false
+    restart() {
+        if ( this.game_over ) {
+            this.start()
+            console.log('starting new game')
         }
+    },
+
+    make_play(position) {
+        if (this.game_over && this.symbols.options[this.symbols.turn_index]) return false
+
+        const current_symbol = this.symbols.options[this.symbols.turn_index]
+        this.board[position] = current_symbol
+
+        this.draw()
+
+        let winning_sequences_index = this.check_winning_sequences(current_symbol)
+        if (winning_sequences_index >= 0 || this.board.indexOf('') < 0) {
+            this.game_is_over()
+        } else {
+            this.symbols.change()
+        }
+
+        return true
     },
 
     check_winning_sequences(symbol) {        
@@ -64,21 +70,22 @@ const tic_tac_toe = {
         return -1
     },
 
+    stylizing_winning_sequence(winning_sequences) {
+        winning_sequences.forEach((position) => {
+            this  
+        })
+    },
+
     game_is_over() {
         this.game_over = true
         console.log('GAME OVER')
     },
 
     draw() {
-        let content= ''
-
-        for( i in this.board ) {
-            content += `<div onClick="tic_tac_toe.make_play(${i})">${this.board[i]}</div>`
-        }
-
-        this.container_element.innerHTML= content
-
-    }
+        this.container_element.innerHTML = this.board
+                .map((element, index) => `<div onclick="tic_tac_toe.make_play('${index}')"> ${element} </div>`)
+                .reduce((content, current) => content + current);
+    },
 
 }
 
