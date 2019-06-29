@@ -3,6 +3,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #dfdfdf;
 }
 
 #game {
@@ -15,7 +16,7 @@ body {
   grid-template: repeat(3, 1fr) / repeat(3, 1fr)
 }
 
-#game>div {
+#game div {
   border: 6px solid #2c3e50;
   font-family: Helvetica;
   font-weight: bold;
@@ -33,12 +34,12 @@ body {
   padding: 10px 20px
 }
 
-#game > div.winner {
-  background: yellow;
+#game div.winner {
+  background: #c9c94e; 
 }
 
-#game > div.winner > span {
-  color: blue;
+#game div.winner span {
+  color: #34495e;
 }
 
 @media (min-width: 600px) {
