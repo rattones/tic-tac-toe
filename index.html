@@ -10,8 +10,20 @@
 </head>
 <body>
 
-    <div id="game"></div>
-    <button class="btn" onClick="tic_tac_toe.restart()" title="Restart this game">New Game</button>
+    <div class="form">
+        <div>
+            <label for="player-name">Jogador:
+                <input type="text" name="player-name" id="player-name" placeholder="Nome">
+            </label>
+        </div>
+        <div>
+            <button class="btn" onClick="tic_tac_toe.restart()" title="Restart this game">New Game</button>
+        </div>
+    </div>
+
+    <div id="game-area">
+        <div id="game"></div>
+    </div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>

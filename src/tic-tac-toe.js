@@ -9,7 +9,7 @@ const tic_tac_toe = {
         }
     },
     container_element: null,
-    game_over: false,
+    game_over: true,
     winning_sequences: [
         [0, 1, 2],
         [3, 4, 5],
@@ -26,15 +26,21 @@ const tic_tac_toe = {
     },
 
     start() {
+        this.init(document.querySelector("#game"))
         this.board.fill('')
         this.game_over= false
         this.draw()
+        game_database.new( document.getElementById('player-name').value, this.board )
+        console.log("starting game")
     },
 
     restart() {
         if ( this.game_over ) {
+            document.getElementById('game-area').style.display = 'block'
             this.start()
             console.log('starting new game')
+        } else {
+            console.log('no here')
         }
     },
 
@@ -91,9 +97,10 @@ const tic_tac_toe = {
         this.container_element.innerHTML = this.board
                 .map((element, index) => `<div onclick="tic_tac_toe.make_play('${index}')"><span>${element}</span></div>`)
                 .reduce((content, current) => content + current);
+
+        game_database.update(this.board, this.game_over)
     },
 
 }
 
-tic_tac_toe.init(document.querySelector("#game"))
-tic_tac_toe.start()
+// tic_tac_toe.start()
